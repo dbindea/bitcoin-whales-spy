@@ -1,11 +1,30 @@
 {
-  "name": "bitcoin-spy",
+  "name": "whales-assets-spy",
   "version": "1.0.0",
-  "description": "Bitcoin whale alert",
+  "description": "Alerts when whales buy or sell assets",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rimraf dist",
+    "build": "npm run clean && babel src -d dist --source-maps",
+    "start": "nodemon src/index.js --exec babel-node",
+    "start:prod": "node dist/index.js",
+    "format": "prettier --write \"src/**/*.js\""
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "dotenv": "^14.2.0",
+    "mongoose": "^6.1.7",
+    "scrape-it": "^5.3.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.10",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.10",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1",
+    "rimraf": "^3.0.2"
+  }
 }
