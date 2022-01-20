@@ -42,8 +42,8 @@ export default class Bitcoin {
       if (array && array.data && array.data.page) {
         result.push({
           asset: 'BTC',
-          address: addresses[index], 
-          transactions: array.data.page 
+          address: addresses[index],
+          transactions: array.data.page,
         });
       }
     });

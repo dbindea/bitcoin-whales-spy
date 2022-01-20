@@ -1,4 +1,4 @@
-import Bitcoin from "./btc.service";
+import Bitcoin from './btc.service';
 
 export default class LaunchPlatform {
   btc = new Bitcoin();
