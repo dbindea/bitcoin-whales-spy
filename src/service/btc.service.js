@@ -1,15 +1,16 @@
 import config from '../config';
+import UtilsService from './utils.service';
 
 const scrapeIt = require('scrape-it');
 
-export default class Bitcoin {
+export default class BitcoinService {
+  utilsService = new UtilsService();
+
   async scanBtc() {
     const promises = [];
     const result = [];
 
-    const addresses = config.BTC_ADDRESSES.split(',')
-      .filter((el) => el != null && el.toString().trim())
-      .map((el) => el.trim());
+    const addresses = this.utilsService.splitData(config.BTC_ADDRESSES);
 
     const callback = {
       page: {
