@@ -7,22 +7,22 @@ export default class MongoService {
     btcTransactions.forEach((addressTransactions) => {
       const address = addressTransactions.address;
       const transactions = addressTransactions.transactions;
-      transactions.forEach((transaction) => {
-        if (transaction.amount > 2 || transaction.amount < -2) {
+      transactions.forEach((transact) => {
+        if (transact.amount > 2 || transact.amount < -2) {
           transactInput.push(
             new BtcTransaction({
               address,
-              block: transaction.block,
-              amount: Math.floor(transaction.amount),
-              price: transaction.price,
-              currency: transaction.currency,
-              time: transaction.time,
+              block: transact.block,
+              amount: Math.floor(transact.amount),
+              price: transact.price,
+              currency: 'USD',
+              time: transact.time,
             }),
           );
         }
       });
     });
-    await BtcTransaction.insertMany(transactInput, { ordered: false });
+    await BtcTransaction.insertMany(transactInput, { ordered: false }, (error, docs) => {});
   }
 
   async getUnnotifiedBtcTransactions() {
@@ -36,7 +36,9 @@ export default class MongoService {
     return result.sort(criteria);
   }
 
-  async updateBtcTransactions(transactions) {}
+  async markAsChecked(transact) {
+    await BtcTransaction.findOneAndUpdate({ _id: transact._id }, transact);
+  }
 
   // DASH
 }

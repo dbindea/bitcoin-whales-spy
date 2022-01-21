@@ -11,13 +11,11 @@ export default class LaunchPlatform {
   utilsService = new UtilsService();
 
   async launchBtc() {
-    //const btcTransactions = await this.btcService.scanBtc();
-    //await this.mongoService.saveBtcTransactions(btcTransactions);
+    // const btcTransactions = await this.btcService.scanBtc();
+    // await this.mongoService.saveBtcTransactions(btcTransactions);
     const phoneArray = this.utilsService.splitData(config.BTC_PHONES);
     const unnotifiedTransactions = await this.mongoService.getUnnotifiedBtcTransactions();
-
-    const notifiedTransactions = await this.smsService.notifySmsSubscribers(phoneArray, unnotifiedTransactions);
-
-    // await this.mongoService.updateBtcTransactions(notifiedTransactions);
+    await this.smsService.notifySmsSubscribers(phoneArray, unnotifiedTransactions);
+    return true;
   }
 }

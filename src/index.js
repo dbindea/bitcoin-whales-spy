@@ -7,7 +7,15 @@ const platform = new LaunchPlatform();
 
 (async () => {
   await mongoConnect();
-  setTimeout(() => {
-    platform.launchBtc();
+
+  setInterval(() => {
+    // BTC
+    platform.launchBtc().then((result) => {
+      if (result) {
+        console.log('Last BTC process executed correctly at', new Date());
+      }
+    });
+
+    // DASH
   }, MIN * REFRESH_RATE_MIN);
 })();
