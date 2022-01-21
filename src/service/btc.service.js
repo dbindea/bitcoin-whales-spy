@@ -45,6 +45,7 @@ export default class BitcoinService {
           asset: 'BTC',
           address: addresses[index],
           transactions: array.data.page,
+          currency: 'USD'
         });
       }
     });
