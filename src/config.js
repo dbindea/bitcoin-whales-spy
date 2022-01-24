@@ -11,4 +11,5 @@ module.exports = {
   BTC_URL: process.env.BTC_URL,
   BTC_ADDRESSES: process.env.BTC_ADDRESSES,
   BTC_PHONES: process.env.BTC_PHONES,
-};
+  BTC_MAILS: process.env.BTC_MAILS
+}
