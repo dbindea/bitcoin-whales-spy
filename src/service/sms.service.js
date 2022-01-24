@@ -6,27 +6,22 @@ export default class SmsService {
     unnotifiedTransactions.forEach((transact) => {
       if (!transact.is_checked) {
         if (transact.amount > 0) {
-          console.info(
-            `[...${transact.address.substr(transact.address.length - 5)}] Compra ${transact.amount} ${transact.asset} a ${transact.price} ${
-              transact.currency
-            } a las ${transact.time.getHours()}:${transact.time.getMinutes()}`,
-          );
-        } else {
-          console.info(
-            `[...${transact.address.substr(transact.address.length - 5)}] Venta ${transact.amount} ${transact.asset} a ${transact.price} ${
-              transact.currency
-            } a las ${transact.time.getHours()}:${transact.time.getMinutes()}`,
-          );
+          let text = '';
+          if (transact.amount > 0) {
+            text = `🐳 Buys ${transact.amount} ${transact.asset}`;
+          } else {
+            text = `🐳 Sells ${transact.amount} ${transact.asset}`;
+          }
         }
-        transact.is_checked = true;
-        this.mongo.markAsChecked(transact);
+        phoneArray.forEach((phone) => {
+          this.sendSms(phone, text);
+        });
       }
     });
   }
 
   async sendSms(phone, text) {
-    let status = false;
-
-    return status;
+    // TODO: to develop
+    return null;
   }
 }

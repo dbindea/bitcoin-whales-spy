@@ -15,7 +15,5 @@ const platform = new LaunchPlatform();
         console.log('Last BTC process executed correctly at', new Date());
       }
     });
-
-    // DASH
   }, MIN * REFRESH_RATE_MIN);
 })();
