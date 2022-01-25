@@ -6,12 +6,10 @@ const MIN = 1000 * 60;
 const platform = new LaunchPlatform();
 
 (async () => {
-  console.log(config);
-  
   await mongoConnect();
 
   // First launch
-  platform.launchBtc();
+  await platform.launchBtc();
 
   setInterval(() => {
     // BTC
