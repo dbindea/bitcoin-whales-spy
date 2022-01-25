@@ -41,7 +41,10 @@ export default class BitcoinService {
     promisesResponse.forEach((array, index) => {
 
       // console.log('///array response ' + index, array);
-      console.log('///data response ' + index, Object.keys(array));
+      console.log('--->> data ' + index, Object.keys(array.data));
+      console.log('--->> $ ' + index, Object.keys(array.$));
+      console.log('--->> response ' + index, Object.keys(array.response));
+      console.log('--->> body ' + index, Object.keys(array.body));
       // console.log('///page response ' + index, array.data.page);
 
       if (array && array.data && array.data.page) {
