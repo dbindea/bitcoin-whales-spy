@@ -13,15 +13,27 @@ export default class BitcoinService {
     const addresses = this.utilsService.splitData(config.BTC_ADDRESSES);
     const callback = {
       page: {
-        listItem: 'td.coin',
+        listItem: 'table#table_maina tbody tr',
         data: {
-          block: 'span'
+          block: 'a',
+          time: {
+            selector: 'td span.muted.utc.hidden-desktop',
+            convert: (date) => new Date(date),
+          },
+          amount: {
+            selector: 'td:nth-child(3n) span',
+            convert: (x) => Number(x.split('BTC')[0].trim().replace(',', '')),
+          },
+          price: {
+            selector: 'td:nth-child(5n)',
+            convert: (x) => Number(x.split('@')[1].trim().slice(1).replace(',', '')),
+          },
         },
       },
     };
 
     addresses.forEach((address) => {
-      scrapeIt('https://bitinfocharts.com/', callback).then(({ data, response }) => {
+      scrapeIt('https://bitinfocharts.com/bitcoin/address/1P5ZEDWTKTFGxQjZphgWPQUpe554WKDfHQ', callback).then(({ data, response }) => {
         console.log(data.page);
         console.log('STATUS CODE ' + response.statusCode, response.statusMessage);
       });
