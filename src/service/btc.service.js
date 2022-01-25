@@ -34,8 +34,7 @@ export default class BitcoinService {
 
     addresses.forEach((address) => {
       scrapeIt(config.BTC_URL + address, callback).then(({ data, response }) => {
-        console.log(Object.keys(response));
-        console.log('STATUS CODE', response.statusCode);
+        console.log('STATUS CODE ' + response.statusCode, response.statusMessage);
       });
       // promises.push(scrapeIt(config.BTC_URL + address, callback));
     });
