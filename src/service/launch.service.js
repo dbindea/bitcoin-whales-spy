@@ -17,7 +17,6 @@ export default class LaunchPlatform {
     await this.mongoService.saveBtcTransactions(btcTransactions);
     const phoneArray = this.utilsService.splitData(config.BTC_PHONES);
     const emailArray = this.utilsService.splitData(config.BTC_EMAILS);
-    console.log(emailArray);
     // const unnotifiedTransactions = await this.mongoService.getUnnotifiedBtcTransactions();
     // await this.smsService.notifySmsSubscribers(phoneArray, unnotifiedTransactions);
     // await this.emailService.notifyEmailSubscribers(emailArray, unnotifiedTransactions);

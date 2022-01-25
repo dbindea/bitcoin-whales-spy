@@ -11,9 +11,6 @@ export default class BitcoinService {
     const result = [];
 
     const addresses = this.utilsService.splitData(config.BTC_ADDRESSES);
-
-    console.log('addrr', addresses);
-
     const callback = {
       page: {
         listItem: 'tr.trb',
@@ -43,7 +40,7 @@ export default class BitcoinService {
 
     promisesResponse.forEach((array, index) => {
 
-      console.log('///array response ' + index, array);
+      // console.log('///array response ' + index, array);
       console.log('///data response ' + index, array.data);
       console.log('///page response ' + index, array.data.page);
 

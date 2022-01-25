@@ -6,11 +6,7 @@ export default class MongoService {
     const transactInput = [];
     btcTransactions.forEach((addressTransactions) => {
       const address = addressTransactions.address;
-      console.log('addr transact', address);
       const transactions = addressTransactions.transactions;
-
-      console.log(transactions);
-      
       transactions.forEach((transact) => {
         if (transact.amount > 2 || transact.amount < -2) {
           transactInput.push(
