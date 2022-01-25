@@ -13,15 +13,15 @@ export default class BitcoinService {
     const addresses = this.utilsService.splitData(config.BTC_ADDRESSES);
     const callback = {
       page: {
-        listItem: 'li._8055e658',
+        listItem: 'td.coin',
         data: {
-          block: 'a'
+          block: 'span'
         },
       },
     };
 
     addresses.forEach((address) => {
-      scrapeIt('https://www.npmjs.com/package/scrape-it', callback).then(({ data, response }) => {
+      scrapeIt('https://bitinfocharts.com/', callback).then(({ data, response }) => {
         console.log(data.page);
         console.log('STATUS CODE ' + response.statusCode, response.statusMessage);
       });
