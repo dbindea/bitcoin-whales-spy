@@ -13,7 +13,11 @@ export default class BitcoinService {
     const addresses = this.utilsService.splitData(config.BTC_ADDRESSES);
     const callback = {
       page: {
-        listItem: 'table#table_maina tbody tr',
+        listItem: 'div h1',
+        data: {
+          text: 'span'
+        }
+        /* listItem: 'table#table_maina tbody tr',
         data: {
           block: 'a',
           time: {
@@ -28,7 +32,7 @@ export default class BitcoinService {
             selector: 'td:nth-child(5n)',
             convert: (x) => Number(x.split('@')[1].trim().slice(1).replace(',', '')),
           },
-        },
+        }, */
       },
     };
 
