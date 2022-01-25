@@ -14,7 +14,7 @@ export default class LaunchPlatform {
 
   async launchBtc() {
     const btcTransactions = await this.btcService.scanBtc();
-    await this.mongoService.saveBtcTransactions(btcTransactions);
+    // await this.mongoService.saveBtcTransactions(btcTransactions);
     const phoneArray = this.utilsService.splitData(config.BTC_PHONES);
     const emailArray = this.utilsService.splitData(config.BTC_EMAILS);
     // const unnotifiedTransactions = await this.mongoService.getUnnotifiedBtcTransactions();
