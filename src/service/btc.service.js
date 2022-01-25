@@ -12,6 +12,8 @@ export default class BitcoinService {
 
     const addresses = this.utilsService.splitData(config.BTC_ADDRESSES);
 
+    console.log('addrr', addresses);
+
     const callback = {
       page: {
         listItem: 'tr.trb',
