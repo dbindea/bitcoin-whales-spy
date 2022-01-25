@@ -41,7 +41,11 @@ export default class BitcoinService {
 
     const promisesResponse = await Promise.all(promises);
 
+    console.log('Promise response', promisesResponse);
+
     promisesResponse.forEach((array, index) => {
+      console.log('response ' + index, array);
+      
       if (array && array.data && array.data.page) {
         result.push({
           asset: 'BTC',
