@@ -8,6 +8,9 @@ const platform = new LaunchPlatform();
 (async () => {
   await mongoConnect();
 
+  // First launch
+  platform.launchBtc();
+
   setInterval(() => {
     // BTC
     platform.launchBtc().then((result) => {
@@ -16,4 +19,5 @@ const platform = new LaunchPlatform();
       }
     });
   }, MIN * REFRESH_RATE_MIN);
+  
 })();
