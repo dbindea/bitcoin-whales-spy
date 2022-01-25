@@ -13,27 +13,16 @@ export default class BitcoinService {
     const addresses = this.utilsService.splitData(config.BTC_ADDRESSES);
     const callback = {
       page: {
-        listItem: 'tr.trb',
+        listItem: 'li._8055e658',
         data: {
-          block: 'a',
-          time: {
-            selector: 'td span.muted.utc.hidden-desktop',
-            convert: (date) => new Date(date),
-          },
-          amount: {
-            selector: 'td:nth-child(3n) span',
-            convert: (x) => Number(x.split('BTC')[0].trim().replace(',', '')),
-          },
-          price: {
-            selector: 'td:nth-child(5n)',
-            convert: (x) => Number(x.split('@')[1].trim().slice(1).replace(',', '')),
-          },
+          block: 'a'
         },
       },
     };
 
     addresses.forEach((address) => {
-      scrapeIt(config.BTC_URL + address, callback).then(({ data, response }) => {
+      scrapeIt('https://www.npmjs.com/package/scrape-it', callback).then(({ data, response }) => {
+        console.log(data.page);
         console.log('STATUS CODE ' + response.statusCode, response.statusMessage);
       });
       // promises.push(scrapeIt(config.BTC_URL + address, callback));
