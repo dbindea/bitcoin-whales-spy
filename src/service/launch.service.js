@@ -1,5 +1,5 @@
 import config from '../config';
-import BitcoinService from './btc.service';
+import BitcoinService from './assets/btc.service';
 import EmailService from './email.service';
 import MongoService from './mongo.service';
 import SmsService from './sms.service';
