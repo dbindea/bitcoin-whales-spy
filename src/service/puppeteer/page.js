@@ -1,16 +1,11 @@
-const scraperObject = {
-  // url: 'http://books.toscrape.com',
-  async scraper(browser, url) {
+/*   async function scanUrl(browser, url) {
     let page = await browser.newPage();
-    console.log(`Navigating to ${url}...`);
-    // Navigate to the selected page
     await page.goto(url);
 
-    let scrapedData = [];
-        // Wait for the required DOM to be rendered
-            
-    // Wait for the required DOM to be rendered
+    const scrapedData = [];
     await page.waitForSelector('.page_inner');
+
+
     // Get the link to all the required books
     let urls = await page.$$eval('section ol > li', (links) => {
       // Make sure the book to be scraped is in stock
@@ -19,6 +14,7 @@ const scraperObject = {
       links = links.map((el) => el.querySelector('h3 > a').href);
       return links;
     });
+
 
     // Loop through each of those links, open a new page instance and get the relevant data from them
     let pagePromise = (link) =>
@@ -48,7 +44,8 @@ const scraperObject = {
         scrapedData.push(currentPageData);
         console.log(currentPageData);
     });
-  },
-};
+  }
 
-module.exports = scraperObject;
+module.exports = {
+  scraper: scanUrl
+} */

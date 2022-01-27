@@ -17,8 +17,7 @@
     "aws-sdk": "^2.1062.0",
     "dotenv": "^14.2.0",
     "mongoose": "^6.1.7",
-    "puppeteer": "^13.1.2",
-    "scrape-it": "^5.3.2"
+    "puppeteer": "^13.1.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.8",

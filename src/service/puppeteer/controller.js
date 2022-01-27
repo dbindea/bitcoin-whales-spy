@@ -1,4 +1,4 @@
-const page = require('./page');
+/* const page = require('./page');
 async function scrapeAll(browserInstance){
     let browser;
     try{
@@ -11,4 +11,4 @@ async function scrapeAll(browserInstance){
     }
 }
 
-module.exports = (browserInstance) => scrapeAll(browserInstance)
+module.exports = (browserInstance) => scrapeAll(browserInstance) */
