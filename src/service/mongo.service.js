@@ -48,6 +48,4 @@ export default class MongoService {
     await BtcTransaction.findOneAndUpdate({ _id: transact._id }, transact);
     this.utilsService.log({ summary: 'transtaction mark as checked', message: { _id: transact._id, block: transact.block, address: transact.address } });
   }
-
-  // DASH
 }
