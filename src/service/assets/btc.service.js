@@ -39,6 +39,7 @@ export default class BitcoinService {
 
     promisesResponse.forEach((array, index) => {
       if (array && array.data && array.data.page) {
+        this.utilsService.log({ summary: `push transactions for ${addresses[index]}`, message: `transactions count: ${array.data.page.length}` });
         result.push({
           asset: 'BTC',
           address: addresses[index],

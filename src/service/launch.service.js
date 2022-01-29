@@ -18,6 +18,8 @@ export default class LaunchPlatform {
     // let browserInstance = await browser.startBrowser(browser);
 
     const btcTransactions = await this.btcService.scanBtcScrapIt();
+    this.utilsService.log({ summary: 'scrap BTC addresses', message: btcTransactions.length });
+
     await this.mongoService.saveBtcTransactions(btcTransactions);
 
     // const phoneArray = this.utilsService.splitData(config.BTC_PHONES);

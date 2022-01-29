@@ -4,7 +4,9 @@ config();
 
 module.exports = {
   // App
-  REFRESH_RATE_MIN: process.env.REFRESH_RATE_MIN,
+  REFRESH_RATE_MIN: process.env.REFRESH_RATE_MIN || 60,
+  LOG: process.env.LOG || false,
+  MAX_ALERTS_ADDR_TRANSACT: process.env.MAX_ALERTS_ADDR_TRANSACT || 1,
   EMAIL_FROM: process.env.EMAIL_FROM,
   // AWS Config
   AWS_ACCESS: process.env.AWS_ACCESS,

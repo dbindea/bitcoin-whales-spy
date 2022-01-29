@@ -1,6 +1,9 @@
 import { BtcTransaction } from '../model/schema-index';
+import UtilsService from './utils.service';
 
 export default class MongoService {
+  utilsService = new UtilsService();
+
   // BTC
   async saveBtcTransactions(btcTransactions) {
     const transactInput = [];
@@ -22,7 +25,10 @@ export default class MongoService {
         }
       });
     });
-    await BtcTransaction.insertMany(transactInput, { ordered: false }, (error, docs) => {});
+    await BtcTransaction.insertMany(transactInput, { ordered: false }, (error, docs) => {
+      if (error) this.utilsService.log({ summary: 'insert many error', level: 'error', message: {code: error.code} });
+      else this.utilsService.log({ summary: 'insert many transactions', message: Object.keys(docs) });
+    });
   }
 
   async getUnnotifiedBtcTransactions() {
@@ -30,6 +36,8 @@ export default class MongoService {
       is_checked: false,
     };
     const result = await BtcTransaction.find(filter);
+    this.utilsService.log({ summary: 'search unnotified transactions', message: `transactions find count: ${result.length}` });
+
     const criteria = (a, b) => {
       return b.time.getTime() - a.time.getTime();
     };
@@ -38,6 +46,7 @@ export default class MongoService {
 
   async markAsChecked(transact) {
     await BtcTransaction.findOneAndUpdate({ _id: transact._id }, transact);
+    this.utilsService.log({ summary: 'transtaction mark as checked', message: { _id: transact._id, block: transact.block, address: transact.address } });
   }
 
   // DASH

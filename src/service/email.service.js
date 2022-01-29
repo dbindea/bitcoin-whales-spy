@@ -1,12 +1,13 @@
 import * as AWS from 'aws-sdk';
-import { AWS_ACCESS, AWS_SECRET, EMAIL_FROM } from '../config';
+import { AWS_ACCESS, AWS_SECRET, BTC_URL, EMAIL_FROM, MAX_ALERTS_ADDR_TRANSACT } from '../config';
 import EmailRequest from '../model/email.model';
 import MongoService from './mongo.service';
-
-const MAX_ALERTS_ADDR_TRANSACT = 5;
+import UtilsService from './utils.service';
 
 export default class EmailService {
-  mongo = new MongoService();
+  mongoService = new MongoService();
+  utilsService = new UtilsService();
+
   async notifyEmailSubscribers(emailArray, unnotifiedTransactions) {
     let count = 0;
     unnotifiedTransactions.forEach((transact) => {
@@ -18,18 +19,18 @@ export default class EmailService {
           subject = `🐳 Buys ${transact.amount} ${transact.asset}`;
           text = `${transact.amount} ${transact.asset} was purchased at ${transact.price} ${
             transact.currency
-          } at ${transact.time.getHours()}:${transact.time.getMinutes()} at the address: ${transact.address}`;
+          } at ${transact.time.getHours()}:${transact.time.getMinutes()} at the address: <a href="${BTC_URL}${transact.address}" >${transact.address}</a>`;
         } else {
           subject = `🐳 Sells ${transact.amount} ${transact.asset}`;
           text = `${transact.amount} ${transact.asset} were sold at ${transact.price} ${
             transact.currency
-          } at ${transact.time.getHours()}:${transact.time.getMinutes()} at the address: ${transact.address}`;
+          } at ${transact.time.getHours()}:${transact.time.getMinutes()} at the address: <a href="${BTC_URL}${transact.address}" >${transact.address}</a>`;
         }
         if (count++ < MAX_ALERTS_ADDR_TRANSACT) {
           this.sendEmail(emailArray, subject, text);
         }
         transact.is_checked = true;
-        this.mongo.markAsChecked(transact);
+        this.mongoService.markAsChecked(transact);
       }
     });
   }
@@ -83,6 +84,9 @@ export default class EmailService {
     };
 
     // Send email
-    return new AWS.SES(SESConfig).sendEmail(awsEmail).promise();
+    new AWS.SES(SESConfig).sendEmail(awsEmail, function (err, data) {
+      if (err) this.utilsService.log({ summary: 'email send error', level: 'error', message: { error: err, stack: err.stack } });
+      else this.utilsService.log({ summary: 'email send', message: data.MessageId });
+    });
   }
 }
