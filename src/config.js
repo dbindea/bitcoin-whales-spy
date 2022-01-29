@@ -15,7 +15,7 @@ module.exports = {
 
   // Mongo DB
   MONGODB_URI: process.env.MONGODB_URI,
-  
+
   // BTC
   BTC_URL: process.env.BTC_URL,
   BTC_ADDRESSES: process.env.BTC_ADDRESSES,

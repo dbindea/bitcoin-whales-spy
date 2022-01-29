@@ -16,10 +16,8 @@ const utils = new UtilsService();
 
   setInterval(() => {
     // BTC
-    platform.launchBtc().then((result) => {
-      if (result) {
-        utils.log({ summary: 'launchBtc', message: 'Last BTC process executed correctly' });
-      }
+    platform.launchBtc().then(() => {
+      utils.log({ summary: 'launchBtc', message: 'Last BTC process executed correctly' });
     });
   }, MIN * REFRESH_RATE_MIN);
 })();

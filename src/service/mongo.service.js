@@ -25,10 +25,13 @@ export default class MongoService {
         }
       });
     });
-    await BtcTransaction.insertMany(transactInput, { ordered: false }, (error, docs) => {
-      if (error) this.utilsService.log({ summary: 'insert many error', level: 'error', message: { code: error.code } });
-      else this.utilsService.log({ summary: 'insert many transactions', message: `transactions count: ${docs.length}` });
-    });
+
+    try {
+      return await BtcTransaction.insertMany(transactInput, { ordered: false });
+    } catch (error) {
+      this.utilsService.log({ summary: 'insert many error', level: 'error', message: { code: error.code } });
+      return Promise.resolve([]);
+    }
   }
 
   async getUnnotifiedBtcTransactions() {
