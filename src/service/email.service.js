@@ -85,8 +85,9 @@ export default class EmailService {
 
     // Send email
     new AWS.SES(SESConfig).sendEmail(awsEmail, function (err, data) {
-      if (err) this.utilsService.log({ summary: 'email send error', level: 'error', message: { error: err, stack: err.stack } });
-      else this.utilsService.log({ summary: 'email send', message: data.MessageId });
+      const utilsService = new UtilsService();
+      if (err) utilsService.log({ summary: 'email send error', level: 'error', message: { error: err, stack: err.stack } });
+      else utilsService.log({ summary: 'email sent', message: data.MessageId });
     });
   }
 }
